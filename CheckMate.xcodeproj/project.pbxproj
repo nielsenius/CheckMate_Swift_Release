@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3404B32519E434F3001FC601 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3404B32419E434F3001FC601 /* Model.swift */; };
 		34E73E1319D8E6B300E47A15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E73E1219D8E6B300E47A15 /* AppDelegate.swift */; };
 		34E73E1519D8E6B300E47A15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E73E1419D8E6B300E47A15 /* ViewController.swift */; };
 		34E73E1819D8E6B300E47A15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E73E1619D8E6B300E47A15 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3404B32419E434F3001FC601 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		34E73E0D19D8E6B300E47A15 /* CheckMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34E73E1119D8E6B300E47A15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34E73E1219D8E6B300E47A15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				34E73E1219D8E6B300E47A15 /* AppDelegate.swift */,
 				34E73E1419D8E6B300E47A15 /* ViewController.swift */,
+				3404B32419E434F3001FC601 /* Model.swift */,
 				34E73E1619D8E6B300E47A15 /* Main.storyboard */,
 				34E73E1919D8E6B300E47A15 /* Images.xcassets */,
 				34E73E1B19D8E6B300E47A15 /* LaunchScreen.xib */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3404B32519E434F3001FC601 /* Model.swift in Sources */,
 				34E73E1519D8E6B300E47A15 /* ViewController.swift in Sources */,
 				34E73E1319D8E6B300E47A15 /* AppDelegate.swift in Sources */,
 			);
@@ -405,6 +409,7 @@
 				34E73E2E19D8E6B300E47A15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		34E73E2F19D8E6B300E47A15 /* Build configuration list for PBXNativeTarget "CheckMateTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				34E73E3119D8E6B300E47A15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
