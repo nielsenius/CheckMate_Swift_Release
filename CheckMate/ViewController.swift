@@ -10,6 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    let moneyColor = UIColor(red: 6 / 256.0, green: 92 / 256.0, blue: 39 / 256.0, alpha: 1)
+    let lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
+    let midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
+    
+    //let sym = getCurrencySymbol()
+    //let sep = getThousandsSeparator()
+    
+    var model = Model()
+    
     //
     // IBOutlets
     //
@@ -24,68 +34,70 @@ class ViewController: UIViewController {
     // IBActions
     //
     
-    @IBAction func splitChanged(sender: AnyObject) {
+    @IBAction func splitChanged(sender: UIStepper) {
+        model.splits = Int(sender.value)
+        redrawDisplay()
+    }
+    
+    @IBAction func tipChanged(sender: UISegmentedControl) {
+        var segmentIdx = sender.selectedSegmentIndex
+        if segmentIdx == 4 {
+            // custom percent
+        } else {
+            model.setPercent(segmentIdx)
+        }
+    }
+    
+    @IBAction func anyButtonPress(sender: UIButton) {
+        // animation
+    }
+    
+    @IBAction func numButtonRelease(sender: UIButton) {
+        model.appendNumToBill(String(sender.tag))
+        redrawDisplay()
+    }
+    
+    @IBAction func decimalButtonRelease(sender: UIButton) {
+        model.appendSepToBill()
+        redrawDisplay()
+    }
+    
+    @IBAction func clearButtonRelease(sender: UIButton) {
         
     }
     
-    @IBAction func tipChanged(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func anyButtonPress(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func numButtonRelease(sender: AnyObject) {
-        // sender.tag
-    }
-    
-    @IBAction func decimalButtonRelease(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func clearButtonRelease(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func deleteButtonRelease(sender: AnyObject) {
+    @IBAction func deleteButtonRelease(sender: UIButton) {
         
     }
     
     //
-    // initialize constants
+    // other functions
     //
-    
-    func setConstants() {
-        let moneyColor = UIColor(red: 6 / 256.0, green: 92 / 256.0, blue: 39 / 256.0, alpha: 1)
-        let lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
-        let midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
-        setCurrencySymbol()
-        setThousandsSeparator()
-    }
-    
-    func setCurrencySymbol() {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("currency") as? String {
-            let sym = value
-        } else {
-            let sym = "$"
-        }
-    }
-    
-    func setThousandsSeparator() {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("separators") as? Int {
-            let sep = value
-        } else {
-            let sep = 0
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // do any additional setup after loading the view
-        setConstants()
-        
+    }
+    
+    func getCurrencySymbol() -> String {
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("currency") as? String {
+            return value
+        } else {
+            return "$"
+        }
+    }
+    
+    func getThousandsSeparator() -> Int {
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey("separators") as? Int {
+            return value
+        } else {
+            return 0
+        }
+    }
+    
+    func redrawDisplay() {
+        billTextField.text = model.bill
     }
 
 }

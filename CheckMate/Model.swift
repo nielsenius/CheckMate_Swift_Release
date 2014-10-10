@@ -15,8 +15,8 @@ class Model {
     var splits: Int
     var custom: String
     
-    let maxSplits: Int
-    let minSplits: Int
+    // let maxSplits: Int
+    // let minSplits: Int
     
     var tip: String {
         get {
@@ -37,17 +37,17 @@ class Model {
         splits = 1
         custom = "0"
         
-        maxSplits = 99
-        minSplits = 1
+        // maxSplits = 99
+        // minSplits = 1
     }
     
     func setPercent(tag: Int) {
         switch tag {
-        case 16:
+        case 0:
             percent = 0.00
-        case 17:
+        case 1:
             percent = 0.10
-        case 18:
+        case 2:
             percent = 0.15
         default:
             percent = 0.20
@@ -58,16 +58,48 @@ class Model {
         percent = (custom as NSString).floatValue
     }
     
-    func addSplit() {
-        if splits < maxSplits {
-            splits += 1
+    func appendNumToBill(num: String) {
+        if bill == "0" {
+            bill = num
+        } else {
+            bill += num
         }
     }
     
-    func subSplit() {
-        if splits > minSplits {
-            splits -= 1
+    func appendNumToCustom(num: String) {
+        if custom == "0" {
+            custom = num
+        } else {
+            custom += num
         }
     }
+    
+    func appendSepToBill() {
+        if bill.rangeOfString(".") == nil {
+            bill = "."
+        } else {
+            bill += "."
+        }
+    }
+    
+    func appendSepToCustom() {
+        if custom.rangeOfString(".") == nil {
+            custom = "."
+        } else {
+            custom += "."
+        }
+    }
+    
+//    func addSplit() {
+//        if splits < maxSplits {
+//            splits += 1
+//        }
+//    }
+//    
+//    func subSplit() {
+//        if splits > minSplits {
+//            splits -= 1
+//        }
+//    }
     
 }

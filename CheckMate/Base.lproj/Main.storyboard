@@ -26,6 +26,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="9sw-dR-l8h"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dWb-jr-wWG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amz-q5-iNX">
@@ -38,6 +39,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="c7Q-Z2-yQQ"/>
+                                    <action selector="clearButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MmG-K1-f1Q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xur-X1-B5o">
@@ -50,6 +52,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="m5L-aD-4gS"/>
+                                    <action selector="deleteButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ne1-6Q-vIz"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7J-k6-zZS">
@@ -68,6 +71,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="0il-qW-3BY"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nGX-pC-HRS"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7uc-2o-cOy">
@@ -178,6 +182,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="Kvu-Vy-UNO"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vtJ-ZA-12p"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRE-NO-aZK">
@@ -189,6 +194,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="FTP-GJ-cXD"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vyq-9b-M2U"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPp-Ox-3pj">
@@ -200,6 +206,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="qcL-Gd-Vz3"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="H2D-Mo-X18"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUz-CL-lZv">
@@ -211,6 +218,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="i4H-VY-L30"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vtk-jX-ncG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAw-1g-1Vz">
@@ -222,6 +230,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="b4V-UB-EwX"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7rj-Xl-fuw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiJ-t3-vkv">
@@ -233,6 +242,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="BhW-Pe-YgX"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="md9-tk-ohe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5C-Q8-nyh">
@@ -244,6 +254,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="Q7t-T3-QfD"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AW5-k6-ULk"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Px-Hh-hx0">
@@ -255,6 +266,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="qjK-rT-Shn"/>
+                                    <action selector="numButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cYk-3E-m1U"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCO-ig-gPp">
@@ -266,6 +278,7 @@
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="28n-dn-t7j"/>
+                                    <action selector="decimalButtonRelease:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IMM-9J-ES3"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ybu-ib-nfN">
@@ -478,10 +491,10 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="billTextView" destination="Rp6-BR-NP6" id="FVh-B0-fFJ"/>
+                        <outlet property="billTextField" destination="Rp6-BR-NP6" id="bI6-q1-GBP"/>
                         <outlet property="splitsTextField" destination="731-JQ-cdN" id="aty-qk-36o"/>
-                        <outlet property="tipTextView" destination="zDp-Lc-Sax" id="vcK-hm-0OI"/>
-                        <outlet property="totalTextView" destination="ygw-cs-vNd" id="JhD-Bx-19t"/>
+                        <outlet property="tipTextField" destination="zDp-Lc-Sax" id="dhB-is-jW0"/>
+                        <outlet property="totalTextField" destination="ygw-cs-vNd" id="XYD-60-coA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
