@@ -37,7 +37,7 @@ class Model {
         splits = 1
         custom = "0"
         
-        maxSplits = 100
+        maxSplits = 99
         minSplits = 1
     }
     

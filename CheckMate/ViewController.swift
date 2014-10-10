@@ -11,6 +11,48 @@ import UIKit
 class ViewController: UIViewController {
     
     //
+    // IBOutlets
+    //
+    
+    @IBOutlet var billTextField: UITextField!
+    @IBOutlet var tipTextField: UITextField!
+    @IBOutlet var totalTextField: UITextField!
+    
+    @IBOutlet var splitsTextField: UITextField!
+    
+    //
+    // IBActions
+    //
+    
+    @IBAction func splitChanged(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func tipChanged(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func anyButtonPress(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func numButtonRelease(sender: AnyObject) {
+        // sender.tag
+    }
+    
+    @IBAction func decimalButtonRelease(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func clearButtonRelease(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func deleteButtonRelease(sender: AnyObject) {
+        
+    }
+    
+    //
     // initialize constants
     //
     
