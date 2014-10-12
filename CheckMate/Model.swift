@@ -27,7 +27,7 @@ class Model {
     var total: String {
         get {
             var billFloat = (bill as NSString).floatValue
-            return String(format: "%.2f", billFloat + (billFloat * percent) / Float(splits))
+            return String(format: "%.2f", (billFloat + (billFloat * percent)) / Float(splits))
         }
     }
     
@@ -39,6 +39,13 @@ class Model {
         
         // maxSplits = 99
         // minSplits = 1
+    }
+    
+    func reset() {
+        percent = 0.00
+        bill = "0"
+        splits = 1
+        custom = "0"
     }
     
     func setPercent(tag: Int) {
@@ -76,8 +83,6 @@ class Model {
     
     func appendSepToBill() {
         if bill.rangeOfString(".") == nil {
-            bill = "."
-        } else {
             bill += "."
         }
     }
@@ -85,8 +90,38 @@ class Model {
     func appendSepToCustom() {
         if custom.rangeOfString(".") == nil {
             custom = "."
+        }
+    }
+    
+    func deleteBill() {
+        if countElements(bill) == 1 {
+            bill = "0"
         } else {
-            custom += "."
+            bill = bill.substringToIndex(bill.endIndex.predecessor())
+        }
+    }
+    
+    func deleteCustom() {
+        if countElements(custom) == 1 {
+            custom = "0"
+        } else {
+            custom = custom.substringToIndex(custom.endIndex.predecessor())
+        }
+    }
+    
+    func clearBill() {
+        if bill == "0" {
+            reset()
+        } else {
+            bill = "0"
+        }
+    }
+    
+    func clearCustom() {
+        if custom == "0" {
+            reset()
+        } else {
+            custom = "0"
         }
     }
     

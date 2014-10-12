@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -15,8 +16,10 @@ class ViewController: UIViewController {
     let lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
     let midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
     
-    //let sym = getCurrencySymbol()
-    //let sep = getThousandsSeparator()
+    let sym = ViewController.getCurrencySymbol()
+    let sep = ViewController.getThousandsSeparator()
+    
+    let tockSound = ViewController.loadTockSound()
     
     var model = Model()
     
@@ -45,29 +48,41 @@ class ViewController: UIViewController {
             // custom percent
         } else {
             model.setPercent(segmentIdx)
+            redrawDisplay()
         }
     }
     
     @IBAction func anyButtonPress(sender: UIButton) {
-        // animation
+        if sender.tag == 12 || sender.tag == 13 {
+            sender.backgroundColor = midGrayColor
+        } else {
+            sender.backgroundColor = lightGrayColor
+        }
+        playTockSound()
     }
     
     @IBAction func numButtonRelease(sender: UIButton) {
         model.appendNumToBill(String(sender.tag))
+        animateButtonRelease(sender)
         redrawDisplay()
     }
     
     @IBAction func decimalButtonRelease(sender: UIButton) {
         model.appendSepToBill()
+        animateButtonRelease(sender)
         redrawDisplay()
     }
     
     @IBAction func clearButtonRelease(sender: UIButton) {
-        
+        model.clearBill()
+        animateButtonRelease(sender)
+        redrawDisplay()
     }
     
     @IBAction func deleteButtonRelease(sender: UIButton) {
-        
+        model.deleteBill()
+        animateButtonRelease(sender)
+        redrawDisplay()
     }
     
     //
@@ -78,9 +93,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // do any additional setup after loading the view
+        redrawDisplay()
     }
     
-    func getCurrencySymbol() -> String {
+    class func getCurrencySymbol() -> String {
         if let value = NSUserDefaults.standardUserDefaults().objectForKey("currency") as? String {
             return value
         } else {
@@ -88,7 +104,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func getThousandsSeparator() -> Int {
+    class func getThousandsSeparator() -> Int {
         if let value = NSUserDefaults.standardUserDefaults().objectForKey("separators") as? Int {
             return value
         } else {
@@ -96,8 +112,44 @@ class ViewController: UIViewController {
         }
     }
     
+    class func loadTockSound() -> AVAudioPlayer {
+        var tockFile = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Tock", ofType: "mp3")!)
+        var tockSound = AVAudioPlayer(contentsOfURL: tockFile, error: nil)
+        tockSound.prepareToPlay()
+        
+        return tockSound
+    }
+    
+    func playTockSound() {
+        tockSound.play()
+    }
+    
     func redrawDisplay() {
-        billTextField.text = model.bill
+        billTextField.text = sym + model.bill
+        tipTextField.text = sym + model.tip
+        
+        if model.splits > 1 {
+            totalTextField.text = "\(sym)\(model.total) x \(model.splits)"
+            splitsTextField.text = "Split \(model.splits) ways"
+        } else {
+            totalTextField.text = sym + model.total
+            splitsTextField.text = "Split 1 way"
+        }
+        
+    }
+    
+    func animateButtonRelease(sender: UIButton) {
+        UIView.animateWithDuration(0.3,
+            animations: {
+                if sender.tag == 12 || sender.tag == 13 {
+                    sender.backgroundColor = self.lightGrayColor
+                } else {
+                    sender.backgroundColor = UIColor.whiteColor()
+                }
+            }, completion: {
+                finished in
+            }
+        )
     }
 
 }
