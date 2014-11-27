@@ -11,15 +11,16 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-    
     let moneyColor = UIColor(red: 6 / 256.0, green: 92 / 256.0, blue: 39 / 256.0, alpha: 1)
-    let lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
+    let lightGrayColor = UIColor(red: 225 / 256.0, green: 225 / 256.0, blue: 225 / 256.0, alpha: 1)
     let midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
     
     let sym = ViewController.getCurrencySymbol()
     let sep = ViewController.getThousandsSeparator()
     
     let tockSound = ViewController.loadTockSound()
+    
+    let customView = UINib(nibName: "Custom", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as UIView
     
     var model = Model()
     
@@ -32,6 +33,9 @@ class ViewController: UIViewController {
     @IBOutlet var totalTextField: UITextField!
     
     @IBOutlet var splitsTextField: UITextField!
+    @IBOutlet var sliderTextField: UITextField!
+    @IBOutlet var slider: UISlider!
+    @IBOutlet var stepper: UIStepper!
     
     //
     // IBActions
@@ -42,14 +46,9 @@ class ViewController: UIViewController {
         redrawDisplay()
     }
     
-    @IBAction func tipChanged(sender: UISegmentedControl) {
-        var segmentIdx = sender.selectedSegmentIndex
-        if segmentIdx == 4 {
-            // custom percent
-        } else {
-            model.setPercent(segmentIdx)
-            redrawDisplay()
-        }
+    @IBAction func tipChanged(sender: UISlider) {
+        model.setPercent(round(sender.value * 100))
+        redrawDisplay()
     }
     
     @IBAction func anyButtonPress(sender: UIButton) {
@@ -136,6 +135,9 @@ class ViewController: UIViewController {
             splitsTextField.text = "Split 1 way"
         }
         
+        sliderTextField.text = "Tip \(Int(model.percent))%"
+        slider.setValue(model.percent / 100, animated: true)
+        stepper.value = Double(model.splits)
     }
     
     func animateButtonRelease(sender: UIButton) {

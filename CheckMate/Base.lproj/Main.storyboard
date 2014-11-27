@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A386b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -31,11 +31,11 @@
                             </button>
                             <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amz-q5-iNX">
                                 <rect key="frame" x="450" y="264" width="150" height="168"/>
-                                <color key="backgroundColor" red="0.87450981139999995" green="0.87450981139999995" blue="0.87450981139999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
                                 <state key="normal" title="C">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="anyButtonPress:" destination="vXZ-lx-hvc" eventType="touchDown" id="c7Q-Z2-yQQ"/>
@@ -44,7 +44,7 @@
                             </button>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xur-X1-B5o">
                                 <rect key="frame" x="450" y="432" width="150" height="168"/>
-                                <color key="backgroundColor" red="0.87450981139999995" green="0.87450981139999995" blue="0.87450981139999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="26"/>
                                 <state key="normal" title="Del">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -317,7 +317,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6XA-dx-BlQ">
-                                <rect key="frame" x="0.0" y="220" width="600" height="1"/>
+                                <rect key="frame" x="0.0" y="220" width="600" height="0.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="Mke-xk-zbC"/>
@@ -330,7 +330,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="9v5-ZG-Ip4"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Split 1 way" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="731-JQ-cdN">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Split 1 way" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="731-JQ-cdN">
                                 <rect key="frame" x="6" y="183" width="122" height="30"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
@@ -343,7 +343,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pi-95-Hem">
-                                <rect key="frame" x="0.0" y="264" width="600" height="1"/>
+                                <rect key="frame" x="0.0" y="264" width="600" height="0.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="Hso-SZ-jaz"/>
@@ -356,20 +356,25 @@
                                     <action selector="splitChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="18u-Bg-utb"/>
                                 </connections>
                             </stepper>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8OE-5d-1Et">
-                                <rect key="frame" x="6" y="228" width="588" height="29"/>
-                                <segments>
-                                    <segment title="0%"/>
-                                    <segment title="10%"/>
-                                    <segment title="15%"/>
-                                    <segment title="20%"/>
-                                    <segment title="Other..."/>
-                                </segments>
-                                <color key="tintColor" red="0.02352941222" green="0.36078432199999999" blue="0.15294118230000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.20000000000000001" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="db8-s2-ZjZ">
+                                <rect key="frame" x="90" y="227" width="506" height="31"/>
+                                <color key="minimumTrackTintColor" red="0.02352941222" green="0.36078432199999999" blue="0.15294118230000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="tipChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="vI0-x9-IG8"/>
+                                    <action selector="tipChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="QlT-qs-rju"/>
                                 </connections>
-                            </segmentedControl>
+                            </slider>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="25" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Tip 20%" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aT7-8f-SE3">
+                                <rect key="frame" x="6" y="227" width="78" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ly1-dE-Vdi"/>
+                                    <constraint firstAttribute="width" constant="78" id="tSk-QW-LU3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -395,6 +400,7 @@
                             <constraint firstItem="X7J-k6-zZS" firstAttribute="leading" secondItem="noK-Mm-NYk" secondAttribute="trailing" id="Dad-L3-fZr"/>
                             <constraint firstItem="F5C-Q8-nyh" firstAttribute="leading" secondItem="AJG-WD-a0V" secondAttribute="trailing" constant="-0.5" id="DkR-GP-MJq"/>
                             <constraint firstItem="noK-Mm-NYk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EAb-3c-TGh"/>
+                            <constraint firstItem="aT7-8f-SE3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-10" id="EAr-V8-uqS"/>
                             <constraint firstItem="Amz-q5-iNX" firstAttribute="width" secondItem="oUz-CL-lZv" secondAttribute="width" id="Fxj-V8-oEk"/>
                             <constraint firstItem="9ls-l3-9Xf" firstAttribute="leading" secondItem="MRE-NO-aZK" secondAttribute="trailing" id="GYI-rg-heL"/>
                             <constraint firstItem="y0m-Tf-tOM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Gzl-IS-X4K"/>
@@ -412,6 +418,7 @@
                             <constraint firstItem="MRE-NO-aZK" firstAttribute="height" secondItem="QiJ-t3-vkv" secondAttribute="height" id="OcO-qr-St4"/>
                             <constraint firstItem="9ls-l3-9Xf" firstAttribute="top" secondItem="8pi-95-Hem" secondAttribute="bottom" constant="-0.5" id="PDx-ab-rNt"/>
                             <constraint firstItem="Amz-q5-iNX" firstAttribute="width" secondItem="XCO-ig-gPp" secondAttribute="width" id="Puf-1C-cS5"/>
+                            <constraint firstItem="db8-s2-ZjZ" firstAttribute="leading" secondItem="aT7-8f-SE3" secondAttribute="trailing" constant="8" id="Qfh-1U-q7I"/>
                             <constraint firstItem="UPp-Ox-3pj" firstAttribute="top" secondItem="8pi-95-Hem" secondAttribute="bottom" constant="-0.5" id="QzN-xS-hjp"/>
                             <constraint firstItem="X7J-k6-zZS" firstAttribute="leading" secondItem="5Px-Hh-hx0" secondAttribute="trailing" id="RXU-39-pHs"/>
                             <constraint firstItem="AJG-WD-a0V" firstAttribute="leading" secondItem="QiJ-t3-vkv" secondAttribute="trailing" id="Rkj-9O-igc"/>
@@ -422,15 +429,14 @@
                             <constraint firstItem="Ybu-ib-nfN" firstAttribute="top" secondItem="UPp-Ox-3pj" secondAttribute="bottom" id="VQn-kn-m5Q"/>
                             <constraint firstItem="MRE-NO-aZK" firstAttribute="height" secondItem="XCO-ig-gPp" secondAttribute="height" id="WUE-WT-4zi"/>
                             <constraint firstItem="Ybu-ib-nfN" firstAttribute="top" secondItem="MRE-NO-aZK" secondAttribute="bottom" id="Wh4-Yx-k2Z"/>
-                            <constraint firstItem="8OE-5d-1Et" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-10" id="Y1r-AL-Xhs"/>
                             <constraint firstItem="MRE-NO-aZK" firstAttribute="leading" secondItem="AJG-WD-a0V" secondAttribute="trailing" constant="-0.5" id="ZBY-qN-cHb"/>
                             <constraint firstItem="Amz-q5-iNX" firstAttribute="leading" secondItem="X7J-k6-zZS" secondAttribute="trailing" constant="-0.5" id="aXx-UW-cp5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="db8-s2-ZjZ" secondAttribute="trailing" constant="-10" id="ajL-KB-j1D"/>
                             <constraint firstItem="7uc-2o-cOy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="bB1-Qb-KDa"/>
                             <constraint firstItem="MRE-NO-aZK" firstAttribute="height" secondItem="FAw-1g-1Vz" secondAttribute="height" id="cTr-4y-9Tt"/>
                             <constraint firstItem="UPp-Ox-3pj" firstAttribute="leading" secondItem="9ls-l3-9Xf" secondAttribute="trailing" constant="-0.5" id="cZz-cu-L5P"/>
                             <constraint firstAttribute="bottom" secondItem="dh2-bh-0Au" secondAttribute="bottom" id="dXi-TR-7KX"/>
                             <constraint firstItem="8pi-95-Hem" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="daa-oL-1kW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8OE-5d-1Et" secondAttribute="trailing" constant="-10" id="dmC-mp-UPi"/>
                             <constraint firstItem="dh2-bh-0Au" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="dyY-T9-Z8g"/>
                             <constraint firstItem="7uc-2o-cOy" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="eK5-4f-HOc"/>
                             <constraint firstItem="AJG-WD-a0V" firstAttribute="leading" secondItem="oUz-CL-lZv" secondAttribute="trailing" id="ekx-Cf-Nnx"/>
@@ -460,11 +466,9 @@
                             <constraint firstItem="noK-Mm-NYk" firstAttribute="top" secondItem="F5C-Q8-nyh" secondAttribute="bottom" id="ofc-vJ-8uT"/>
                             <constraint firstItem="XCO-ig-gPp" firstAttribute="leading" secondItem="9ls-l3-9Xf" secondAttribute="trailing" constant="-0.5" id="ohL-Nr-Y2V"/>
                             <constraint firstItem="7uc-2o-cOy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pcc-03-Q8z"/>
-                            <constraint firstItem="8pi-95-Hem" firstAttribute="top" secondItem="8OE-5d-1Et" secondAttribute="bottom" constant="8" id="ppA-9q-fGY"/>
                             <constraint firstItem="GVY-Yj-wJm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ps5-X7-Al1"/>
                             <constraint firstItem="5Px-Hh-hx0" firstAttribute="top" secondItem="y0m-Tf-tOM" secondAttribute="bottom" constant="-0.5" id="q6D-eS-ucG"/>
                             <constraint firstAttribute="bottom" secondItem="X7J-k6-zZS" secondAttribute="bottom" id="qbr-7N-Qvx"/>
-                            <constraint firstItem="8OE-5d-1Et" firstAttribute="top" secondItem="6XA-dx-BlQ" secondAttribute="bottom" constant="7" id="qkK-JB-ZQ5"/>
                             <constraint firstItem="Ybu-ib-nfN" firstAttribute="top" secondItem="GVY-Yj-wJm" secondAttribute="bottom" id="rBa-I2-Fmq"/>
                             <constraint firstItem="Amz-q5-iNX" firstAttribute="width" secondItem="MRE-NO-aZK" secondAttribute="width" id="rUg-Aj-MoJ"/>
                             <constraint firstItem="noK-Mm-NYk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="red-1o-H0e"/>
@@ -492,7 +496,10 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="billTextField" destination="Rp6-BR-NP6" id="bI6-q1-GBP"/>
+                        <outlet property="slider" destination="db8-s2-ZjZ" id="BFL-l8-LNd"/>
+                        <outlet property="sliderTextField" destination="aT7-8f-SE3" id="BdL-bv-bxJ"/>
                         <outlet property="splitsTextField" destination="731-JQ-cdN" id="aty-qk-36o"/>
+                        <outlet property="stepper" destination="dm0-uy-Ifx" id="zp6-mq-Wlt"/>
                         <outlet property="tipTextField" destination="zDp-Lc-Sax" id="dhB-is-jW0"/>
                         <outlet property="totalTextField" destination="ygw-cs-vNd" id="XYD-60-coA"/>
                     </connections>
