@@ -12,7 +12,7 @@ import AVFoundation
 class ViewController: UIViewController {
     
     let moneyColor = UIColor(red: 6 / 256.0, green: 92 / 256.0, blue: 39 / 256.0, alpha: 1)
-    let lightGrayColor = UIColor(red: 225 / 256.0, green: 225 / 256.0, blue: 225 / 256.0, alpha: 1)
+    let lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
     let midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
     
     let sym = ViewController.getCurrencySymbol()
@@ -20,38 +20,42 @@ class ViewController: UIViewController {
     
     let tockSound = ViewController.loadTockSound()
     
-    let customView = UINib(nibName: "Custom", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as UIView
-    
     var model = Model()
+    
+    let displayWidth = UIScreen.mainScreen().bounds.size.width
+    let displayHeight = UIScreen.mainScreen().bounds.size.height
     
     //
     // IBOutlets
     //
     
-    @IBOutlet var billTextField: UITextField!
-    @IBOutlet var tipTextField: UITextField!
-    @IBOutlet var totalTextField: UITextField!
+    var keypad: UIView!
     
-    @IBOutlet var splitsTextField: UITextField!
-    @IBOutlet var sliderTextField: UITextField!
-    @IBOutlet var slider: UISlider!
-    @IBOutlet var stepper: UIStepper!
+    var billTextField: UITextField!
+    var tipTextField: UITextField!
+    var totalTextField: UITextField!
+    
+    var splitsTextField: UITextField!
+    var sliderTextField: UITextField!
+    
+    var slider: UISlider!
+    var stepper: UIStepper!
     
     //
     // IBActions
     //
     
-    @IBAction func splitChanged(sender: UIStepper) {
+    func splitChanged(sender: UIStepper) {
         model.splits = Int(sender.value)
         redrawDisplay()
     }
     
-    @IBAction func tipChanged(sender: UISlider) {
+    func tipChanged(sender: UISlider) {
         model.setPercent(round(sender.value * 100))
         redrawDisplay()
     }
     
-    @IBAction func anyButtonPress(sender: UIButton) {
+    func anyButtonPress(sender: UIButton) {
         if sender.tag == 12 || sender.tag == 13 {
             sender.backgroundColor = midGrayColor
         } else {
@@ -60,25 +64,25 @@ class ViewController: UIViewController {
         playTockSound()
     }
     
-    @IBAction func numButtonRelease(sender: UIButton) {
+    func numButtonRelease(sender: UIButton) {
         model.appendNumToBill(String(sender.tag))
         animateButtonRelease(sender)
         redrawDisplay()
     }
     
-    @IBAction func decimalButtonRelease(sender: UIButton) {
+    func decimalButtonRelease(sender: UIButton) {
         model.appendSepToBill()
         animateButtonRelease(sender)
         redrawDisplay()
     }
     
-    @IBAction func clearButtonRelease(sender: UIButton) {
+    func clearButtonRelease(sender: UIButton) {
         model.clearBill()
         animateButtonRelease(sender)
         redrawDisplay()
     }
     
-    @IBAction func deleteButtonRelease(sender: UIButton) {
+    func deleteButtonRelease(sender: UIButton) {
         model.deleteBill()
         animateButtonRelease(sender)
         redrawDisplay()
@@ -91,8 +95,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // do any additional setup after loading the view
-        redrawDisplay()
+        println(UIScreen.mainScreen().bounds.size.height)
+        
+//        if UIScreen.mainScreen().bounds.size.height > 568.0 {
+//            self.view.addConstraint(NSLayoutConstraint(item: self.keypad, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.keypad, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+//            )
+//        }
+//        
+//        redrawDisplay()
+    }
+    
+    // How to set the orientation. The return value is not what we expect, Int not UInt so we cast.
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.All.rawValue)
     }
     
     class func getCurrencySymbol() -> String {
@@ -142,6 +157,8 @@ class ViewController: UIViewController {
     
     func animateButtonRelease(sender: UIButton) {
         UIView.animateWithDuration(0.3,
+            delay: 0,
+            options: UIViewAnimationOptions.AllowUserInteraction,
             animations: {
                 if sender.tag == 12 || sender.tag == 13 {
                     sender.backgroundColor = self.lightGrayColor
@@ -153,6 +170,11 @@ class ViewController: UIViewController {
             }
         )
     }
-
+    
+    func drawKeypad() {
+        let view1 = UIView()
+        view1.setTranslatesAutoresizingMaskIntoConstraints(false)
+    }
+    
 }
 

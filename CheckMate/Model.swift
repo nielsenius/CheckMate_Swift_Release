@@ -10,6 +10,8 @@ import Foundation
 
 class Model {
     
+    // declare class attributes
+    
     var percent: Float
     var bill: String
     var splits: Int
@@ -27,6 +29,7 @@ class Model {
         }
     }
     
+    // class constructor
     init() {
         percent = 20.0
         bill = "0"
@@ -43,10 +46,6 @@ class Model {
         self.percent = percent
     }
     
-//    func setPercentFromCustom() {
-//        percent = (custom as NSString).floatValue
-//    }
-    
     func appendNumToBill(num: String) {
         if bill == "0" {
             bill = num
@@ -55,25 +54,11 @@ class Model {
         }
     }
     
-//    func appendNumToCustom(num: String) {
-//        if custom == "0" {
-//            custom = num
-//        } else {
-//            custom += num
-//        }
-//    }
-    
     func appendSepToBill() {
         if bill.rangeOfString(".") == nil {
             bill += "."
         }
     }
-    
-//    func appendSepToCustom() {
-//        if custom.rangeOfString(".") == nil {
-//            custom = "."
-//        }
-//    }
     
     func deleteBill() {
         if countElements(bill) == 1 {
@@ -83,29 +68,8 @@ class Model {
         }
     }
     
-//    func deleteCustom() {
-//        if countElements(custom) == 1 {
-//            custom = "0"
-//        } else {
-//            custom = custom.substringToIndex(custom.endIndex.predecessor())
-//        }
-//    }
-    
     func clearBill() {
         reset()
-//        if bill == "0" {
-//            reset()
-//        } else {
-//            bill = "0"
-//        }
     }
-    
-//    func clearCustom() {
-//        if custom == "0" {
-//            reset()
-//        } else {
-//            custom = "0"
-//        }
-//    }
     
 }

@@ -11,7 +11,6 @@
 		34A0516519E8B24E00693213 /* Tock.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 34A0516419E8B24E00693213 /* Tock.mp3 */; };
 		34E73E1319D8E6B300E47A15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E73E1219D8E6B300E47A15 /* AppDelegate.swift */; };
 		34E73E1519D8E6B300E47A15 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E73E1419D8E6B300E47A15 /* ViewController.swift */; };
-		34E73E1819D8E6B300E47A15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34E73E1619D8E6B300E47A15 /* Main.storyboard */; };
 		34E73E1A19D8E6B300E47A15 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E73E1919D8E6B300E47A15 /* Images.xcassets */; };
 		34E73E1D19D8E6B300E47A15 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34E73E1B19D8E6B300E47A15 /* LaunchScreen.xib */; };
 		34E73E2919D8E6B300E47A15 /* CheckMateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E73E2819D8E6B300E47A15 /* CheckMateTests.swift */; };
@@ -34,7 +33,6 @@
 		34E73E1119D8E6B300E47A15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		34E73E1219D8E6B300E47A15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34E73E1419D8E6B300E47A15 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		34E73E1719D8E6B300E47A15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		34E73E1919D8E6B300E47A15 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		34E73E1C19D8E6B300E47A15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		34E73E2219D8E6B300E47A15 /* CheckMateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CheckMateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,7 +82,6 @@
 				34E73E1219D8E6B300E47A15 /* AppDelegate.swift */,
 				34E73E1419D8E6B300E47A15 /* ViewController.swift */,
 				3404B32419E434F3001FC601 /* Model.swift */,
-				34E73E1619D8E6B300E47A15 /* Main.storyboard */,
 				34E73E1919D8E6B300E47A15 /* Images.xcassets */,
 				34E73E1B19D8E6B300E47A15 /* LaunchScreen.xib */,
 				34E73E1019D8E6B300E47A15 /* Supporting Files */,
@@ -167,6 +164,7 @@
 				TargetAttributes = {
 					34E73E0C19D8E6B300E47A15 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = QJT5ATWZM4;
 					};
 					34E73E2119D8E6B300E47A15 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -198,7 +196,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34E73E1819D8E6B300E47A15 /* Main.storyboard in Resources */,
 				34E73E1D19D8E6B300E47A15 /* LaunchScreen.xib in Resources */,
 				34E73E1A19D8E6B300E47A15 /* Images.xcassets in Resources */,
 				34A0516519E8B24E00693213 /* Tock.mp3 in Resources */,
@@ -244,14 +241,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		34E73E1619D8E6B300E47A15 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34E73E1719D8E6B300E47A15 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		34E73E1B19D8E6B300E47A15 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -344,9 +333,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CheckMate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -354,9 +346,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CheckMate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
