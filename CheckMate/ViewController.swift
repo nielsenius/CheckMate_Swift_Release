@@ -121,8 +121,6 @@ class ViewController: UIViewController {
         drawControls()
         drawKeypad()
         
-        println(UIScreen.mainScreen().bounds.size.height)
-        
 //        if UIScreen.mainScreen().bounds.size.height > 568.0 {
 //            self.view.addConstraint(NSLayoutConstraint(item: self.keypad, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.keypad, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
 //            )
@@ -163,13 +161,15 @@ class ViewController: UIViewController {
     func calculateKeypadHeight() -> CGFloat {
         switch screenHeight {
         case 480.0:
-            return 240
+            return 218
         case 568.0:
             return 320
         case 667.0:
             return 375
-        default:
+        case 736:
             return 414
+        default:
+            return 490
         }
     }
     
@@ -225,8 +225,8 @@ class ViewController: UIViewController {
         var labelHeight: CGFloat = 17
         var labelFontSize: CGFloat = 13
         
-        var numHeight: CGFloat = 40
-        var numFontSize: CGFloat = 36
+        var numFontSize: CGFloat = displayHeight / 4
+        var numHeight: CGFloat = numFontSize + 4
         
         var firstSpace: CGFloat = 20
         var secondSpace: CGFloat = displayHeight / 3 + 10
@@ -241,7 +241,7 @@ class ViewController: UIViewController {
         
         billTextField = UITextField(frame: CGRectMake(margin + labelWidth, firstSpace, screenWidth - labelWidth - margin * 2, numHeight))
         billTextField.text = "$0"
-        billTextField.font = UIFont(name: billLabel.font.fontName, size: numFontSize)
+        billTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         billTextField.textColor = UIColor.whiteColor()
         billTextField.textAlignment = .Right
         display.addSubview(billTextField)
@@ -255,7 +255,7 @@ class ViewController: UIViewController {
         
         tipTextField = UITextField(frame: CGRectMake(margin + labelWidth, secondSpace, screenWidth - labelWidth - margin * 2, numHeight))
         tipTextField.text = "$0"
-        tipTextField.font = UIFont(name: billLabel.font.fontName, size: numFontSize)
+        tipTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         tipTextField.textColor = UIColor.whiteColor()
         tipTextField.textAlignment = .Right
         display.addSubview(tipTextField)
@@ -269,7 +269,7 @@ class ViewController: UIViewController {
         
         totalTextField = UITextField(frame: CGRectMake(margin + labelWidth, thirdSpace, screenWidth - labelWidth - margin * 2, numHeight))
         totalTextField.text = "$0"
-        totalTextField.font = UIFont(name: billLabel.font.fontName, size: numFontSize)
+        totalTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         totalTextField.textColor = UIColor.whiteColor()
         totalTextField.textAlignment = .Right
         display.addSubview(totalTextField)
@@ -314,8 +314,57 @@ class ViewController: UIViewController {
         keypad = UIView(frame: CGRectMake(0, displayHeight + controlsHeight, screenWidth, keypadHeight))
         
         var keyWidth: CGFloat = screenWidth / 4
-        var numFontSize: CGFloat = 36
+        var keyHeight: CGFloat = keypadHeight / 4
+        var numFontSize: CGFloat = keyHeight / 2.25
+        var charFontSize: CGFloat = keyHeight / 3.25
+        var keys = ["7", "8", "9", "4", "5", "6", "1", "2", "3"]
         
+        var count: CGFloat = 0
+        for key in keys {
+            var button = UIButton(frame: CGRectMake(count % 3 * keyWidth, CGFloat(Int(count / 3)) * keyHeight, keyWidth, keyHeight))
+            button.setTitle(key, forState: UIControlState.Normal)
+            button.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: numFontSize)
+            button.backgroundColor = UIColor.whiteColor()
+            button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            keypad.addSubview(button)
+            
+            count++
+        }
+        
+        var zero = UIButton(frame: CGRectMake(0, keypadHeight - keyHeight, keyWidth * 2, keyHeight))
+        zero.setTitle("0", forState: UIControlState.Normal)
+        zero.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: numFontSize)
+        zero.backgroundColor = UIColor.whiteColor()
+        zero.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        keypad.addSubview(zero)
+        
+        var decimal = UIButton(frame: CGRectMake(keyWidth * 2, keypadHeight - keyHeight, keyWidth, keyHeight))
+        decimal.setTitle(".", forState: UIControlState.Normal)
+        decimal.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: numFontSize)
+        decimal.backgroundColor = UIColor.whiteColor()
+        decimal.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        keypad.addSubview(decimal)
+        
+        var clear = UIButton(frame: CGRectMake(keyWidth * 3, 0, keyWidth, keyHeight * 2))
+        clear.setTitle("C", forState: UIControlState.Normal)
+        clear.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: charFontSize)
+        clear.backgroundColor = lightGrayColor
+        clear.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        keypad.addSubview(clear)
+        
+        var delete = UIButton(frame: CGRectMake(keyWidth * 3, keyHeight * 2, keyWidth, keyHeight * 2))
+        delete.setTitle("Del", forState: UIControlState.Normal)
+        delete.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: charFontSize)
+        delete.backgroundColor = lightGrayColor
+        delete.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        keypad.addSubview(delete)
+        
+        var dividers: [[CGFloat]] = [[0, 0, screenWidth, 0.5], [0, keyHeight, screenWidth - keyWidth, 0.5], [0, keyHeight * 2, screenWidth, 0.5], [0, keyHeight * 3, screenWidth - keyWidth, 0.5], [keyWidth, 0, 0.5, keyHeight * 3], [keyWidth * 2, 0, 0.5, keypadHeight], [keyWidth * 3, 0, 0.5, keypadHeight]]
+        for coords in dividers {
+            var divider = UIView(frame: CGRectMake(coords[0], coords[1], coords[2], coords[3]))
+            divider.backgroundColor = UIColor.blackColor()
+            keypad.addSubview(divider)
+        }
         
         self.view.addSubview(keypad)
     }
