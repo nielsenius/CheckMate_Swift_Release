@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     var controlsHeight: CGFloat!
     var keypadHeight: CGFloat!
     var displayHeight: CGFloat!
+    var dividerSize: CGFloat!
     
     var keypad: UIView!
     var display: UIView!
@@ -116,6 +117,7 @@ class ViewController: UIViewController {
         controlsHeight = 86
         keypadHeight = calculateKeypadHeight()
         displayHeight = calculateDisplayHeight()
+        dividerSize = calculateDividerSize()
         
         drawDisplay()
         drawControls()
@@ -175,6 +177,17 @@ class ViewController: UIViewController {
     
     func calculateDisplayHeight() -> CGFloat {
         return screenHeight - controlsHeight - keypadHeight
+    }
+    
+    func calculateDividerSize() -> CGFloat {
+        switch UIScreen.mainScreen().scale {
+        case 1.0:
+            return 1.0
+        case 2.0:
+            return 0.5
+        default:
+            return 1 / 3
+        }
     }
     
     func playTockSound() {
@@ -282,7 +295,7 @@ class ViewController: UIViewController {
         controls = UIView(frame: CGRectMake(0, displayHeight, screenWidth, controlsHeight)) // x, y, width, height
         controls.backgroundColor = UIColor.whiteColor()
         
-        var divider = UIView(frame: CGRectMake(0, controlsHeight / 2, screenWidth, 0.5))
+        var divider = UIView(frame: CGRectMake(0, controlsHeight / 2, screenWidth, dividerSize))
         divider.backgroundColor = UIColor.blackColor()
         controls.addSubview(divider)
         
@@ -290,21 +303,24 @@ class ViewController: UIViewController {
         splitsLabel.text = "Split 1 way"
         controls.addSubview(splitsLabel)
         
-        stepper = UIStepper(frame: CGRectMake(screenWidth - 101, 7, 0, 0))
+        stepper = UIStepper(frame: CGRectMake(screenWidth - 100, 7, 0, 0))
         stepper.tintColor = moneyColor
+        stepper.minimumValue = 1
+        stepper.maximumValue = 99
+        stepper.addTarget(self, action: "splitChanged:", forControlEvents: .ValueChanged)
         controls.addSubview(stepper)
         
         sliderLabel = UILabel(frame: CGRectMake(6, 55, 100, 20))
         sliderLabel.text = "Tip 20%"
         controls.addSubview(sliderLabel)
         
-        slider = UISlider(frame: CGRectMake(100, 65, screenWidth - 106, 0))
-        slider.minimumValue = 0
-        slider.maximumValue = 100
+        slider = UISlider(frame: CGRectMake(100, 50, screenWidth - 106, 29))
+        slider.minimumValue = 0.0
+        slider.maximumValue = 1.0
         slider.continuous = true
         slider.tintColor = moneyColor
-        slider.value = 20
-        // slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
+        slider.value = 0.2
+        slider.addTarget(self, action: "tipChanged:", forControlEvents: .ValueChanged)
         controls.addSubview(slider)
         
         self.view.addSubview(controls)
@@ -326,6 +342,12 @@ class ViewController: UIViewController {
             button.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: numFontSize)
             button.backgroundColor = UIColor.whiteColor()
             button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+            button.tag = key.toInt()!
+            
+            button.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
+            button.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: "numButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+            
             keypad.addSubview(button)
             
             count++
@@ -336,6 +358,11 @@ class ViewController: UIViewController {
         zero.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: numFontSize)
         zero.backgroundColor = UIColor.whiteColor()
         zero.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        zero.tag = 0
+        
+        zero.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
+        zero.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         keypad.addSubview(zero)
         
         var decimal = UIButton(frame: CGRectMake(keyWidth * 2, keypadHeight - keyHeight, keyWidth, keyHeight))
@@ -343,6 +370,11 @@ class ViewController: UIViewController {
         decimal.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: numFontSize)
         decimal.backgroundColor = UIColor.whiteColor()
         decimal.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        decimal.tag = 11
+        
+        decimal.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
+        decimal.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         keypad.addSubview(decimal)
         
         var clear = UIButton(frame: CGRectMake(keyWidth * 3, 0, keyWidth, keyHeight * 2))
@@ -350,6 +382,11 @@ class ViewController: UIViewController {
         clear.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: charFontSize)
         clear.backgroundColor = lightGrayColor
         clear.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        clear.tag = 12
+        
+        clear.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
+        clear.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         keypad.addSubview(clear)
         
         var delete = UIButton(frame: CGRectMake(keyWidth * 3, keyHeight * 2, keyWidth, keyHeight * 2))
@@ -357,9 +394,14 @@ class ViewController: UIViewController {
         delete.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: charFontSize)
         delete.backgroundColor = lightGrayColor
         delete.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        delete.tag = 13
+        
+        delete.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
+        delete.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         keypad.addSubview(delete)
         
-        var dividers: [[CGFloat]] = [[0, 0, screenWidth, 0.5], [0, keyHeight, screenWidth - keyWidth, 0.5], [0, keyHeight * 2, screenWidth, 0.5], [0, keyHeight * 3, screenWidth - keyWidth, 0.5], [keyWidth, 0, 0.5, keyHeight * 3], [keyWidth * 2, 0, 0.5, keypadHeight], [keyWidth * 3, 0, 0.5, keypadHeight]]
+        var dividers: [[CGFloat]] = [[0, 0, screenWidth, dividerSize], [0, keyHeight, screenWidth - keyWidth, dividerSize], [0, keyHeight * 2, screenWidth, dividerSize], [0, keyHeight * 3, screenWidth - keyWidth, dividerSize], [keyWidth, 0, dividerSize, keyHeight * 3], [keyWidth * 2, 0, dividerSize, keypadHeight], [keyWidth * 3, 0, dividerSize, keypadHeight]]
         for coords in dividers {
             var divider = UIView(frame: CGRectMake(coords[0], coords[1], coords[2], coords[3]))
             divider.backgroundColor = UIColor.blackColor()
