@@ -9,6 +9,21 @@
 import UIKit
 import AVFoundation
 
+extension String {
+    
+    subscript (i: Int) -> String {
+        return String(Array(self)[i])
+    }
+    
+    subscript(integerRange: Range<Int>) -> String {
+        let start = advance(startIndex, integerRange.startIndex)
+        let end = advance(startIndex, integerRange.endIndex)
+        let range = start..<end
+        return self[range]
+    }
+    
+}
+
 class ViewController: UIViewController {
     
     // declare class attributes
@@ -17,9 +32,6 @@ class ViewController: UIViewController {
     var lightGrayColor: UIColor!
     var midGrayColor: UIColor!
     var darkGrayColor: UIColor!
-    
-    var sym: String!
-    var sep: Int!
     
     var tockSound: AVAudioPlayer!
     
@@ -46,9 +58,33 @@ class ViewController: UIViewController {
     var slider: UISlider!
     var stepper: UIStepper!
     
-    //
-    // IBActions
-    //
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        moneyColor = UIColor(red: 6 / 256.0, green: 92 / 256.0, blue: 39 / 256.0, alpha: 1)
+        lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
+        midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
+        darkGrayColor = UIColor(red: 38 / 256.0, green: 38 / 256.0, blue: 38 / 256.0, alpha: 1)
+        
+        tockSound = loadTockSound()
+        
+        model = Model()
+        
+        screenWidth = UIScreen.mainScreen().bounds.size.width
+        screenHeight = UIScreen.mainScreen().bounds.size.height
+        controlsHeight = 86
+        keypadHeight = calculateKeypadHeight()
+        displayHeight = calculateDisplayHeight()
+        dividerSize = calculateDividerSize()
+        
+        drawDisplay()
+        drawControls()
+        drawKeypad()
+        
+        // redrawDisplay()
+    }
     
     func splitChanged(sender: UIStepper) {
         model.splits = Int(sender.value)
@@ -56,7 +92,7 @@ class ViewController: UIViewController {
     }
     
     func tipChanged(sender: UISlider) {
-        model.setPercent(round(sender.value * 100))
+        model.setPercent(round(sender.value * 100) / 100)
         redrawDisplay()
     }
     
@@ -76,7 +112,7 @@ class ViewController: UIViewController {
     }
     
     func decimalButtonRelease(sender: UIButton) {
-        model.appendSepToBill()
+        model.appendDecimalToBill()
         animateButtonRelease(sender)
         redrawDisplay()
     }
@@ -96,61 +132,6 @@ class ViewController: UIViewController {
     //
     // other functions
     //
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        moneyColor = UIColor(red: 6 / 256.0, green: 92 / 256.0, blue: 39 / 256.0, alpha: 1)
-        lightGrayColor = UIColor(red: 224 / 256.0, green: 224 / 256.0, blue: 224 / 256.0, alpha: 1)
-        midGrayColor = UIColor(red: 192 / 256.0, green: 192 / 256.0, blue: 192 / 256.0, alpha: 1)
-        darkGrayColor = UIColor(red: 38 / 256.0, green: 38 / 256.0, blue: 38 / 256.0, alpha: 1)
-        
-        sym = getCurrencySymbol()
-        sep = getThousandsSeparator()
-        
-        tockSound = loadTockSound()
-        
-        model = Model()
-        
-        screenWidth = UIScreen.mainScreen().bounds.size.width
-        screenHeight = UIScreen.mainScreen().bounds.size.height
-        controlsHeight = 86
-        keypadHeight = calculateKeypadHeight()
-        displayHeight = calculateDisplayHeight()
-        dividerSize = calculateDividerSize()
-        
-        drawDisplay()
-        drawControls()
-        drawKeypad()
-        
-//        if UIScreen.mainScreen().bounds.size.height > 568.0 {
-//            self.view.addConstraint(NSLayoutConstraint(item: self.keypad, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self.keypad, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
-//            )
-//        }
-//        
-//        redrawDisplay()
-    }
-    
-    // How to set the orientation. The return value is not what we expect, Int not UInt so we cast.
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue)
-    }
-    
-    func getCurrencySymbol() -> String {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("currency") as? String {
-            return value
-        } else {
-            return "$"
-        }
-    }
-    
-    func getThousandsSeparator() -> Int {
-        if let value = NSUserDefaults.standardUserDefaults().objectForKey("separators") as? Int {
-            return value
-        } else {
-            return 0
-        }
-    }
     
     func loadTockSound() -> AVAudioPlayer {
         var tockFile = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Tock", ofType: "mp3")!)
@@ -195,20 +176,30 @@ class ViewController: UIViewController {
     }
     
     func redrawDisplay() {
-        billTextField.text = sym + model.bill
-        tipTextField.text = sym + model.tip
+        var currencySymbol = getCurrencySymbol()
+        
+        billTextField.text = currencySymbol + model.bill
+        tipTextField.text = currencySymbol + String(format: "%.2f", model.tip)
         
         if model.splits > 1 {
-            totalTextField.text = "\(sym)\(model.total) x \(model.splits)"
+            totalTextField.text = currencySymbol + String(format: "%.2f", model.total) + " x \(model.splits)"
             splitsLabel.text = "Split \(model.splits) ways"
         } else {
-            totalTextField.text = sym + model.total
+            totalTextField.text = currencySymbol + String(format: "%.2f", model.total)
             splitsLabel.text = "Split 1 way"
         }
         
-        sliderLabel.text = "Tip \(Int(model.percent))%"
-        slider.setValue(model.percent / 100, animated: true)
+        sliderLabel.text = "Tip \(Int(model.percent * 100))%"
+        slider.setValue(model.percent, animated: true)
         stepper.value = Double(model.splits)
+    }
+    
+    func getCurrencySymbol() -> String {
+        var formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        
+        var currencySymbol = formatter.stringFromNumber(9.99)
+        return currencySymbol![0]
     }
     
     func animateButtonRelease(sender: UIButton) {
@@ -257,6 +248,7 @@ class ViewController: UIViewController {
         billTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         billTextField.textColor = UIColor.whiteColor()
         billTextField.textAlignment = .Right
+        billTextField.userInteractionEnabled = false
         display.addSubview(billTextField)
         
         
@@ -271,6 +263,7 @@ class ViewController: UIViewController {
         tipTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         tipTextField.textColor = UIColor.whiteColor()
         tipTextField.textAlignment = .Right
+        tipTextField.userInteractionEnabled = false
         display.addSubview(tipTextField)
         
         
@@ -285,6 +278,7 @@ class ViewController: UIViewController {
         totalTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         totalTextField.textColor = UIColor.whiteColor()
         totalTextField.textAlignment = .Right
+        totalTextField.userInteractionEnabled = false
         display.addSubview(totalTextField)
         
         
@@ -374,6 +368,7 @@ class ViewController: UIViewController {
         
         decimal.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         decimal.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        decimal.addTarget(self, action: "decimalButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(decimal)
         
@@ -386,6 +381,7 @@ class ViewController: UIViewController {
         
         clear.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         clear.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        clear.addTarget(self, action: "clearButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(clear)
         
@@ -398,6 +394,7 @@ class ViewController: UIViewController {
         
         delete.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         delete.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        delete.addTarget(self, action: "deleteButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(delete)
         

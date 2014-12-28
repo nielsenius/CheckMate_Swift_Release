@@ -16,28 +16,33 @@ class Model {
     var bill: String
     var splits: Int
     
-    var tip: String {
+    var billFloat: Float {
         get {
-            var billFloat = (bill as NSString).floatValue
-            return String(format: "%.2f", billFloat * percent / 100)
+            return NSString(string: bill).floatValue
         }
     }
-    var total: String {
+    
+    var tip: Float {
         get {
-            var billFloat = (bill as NSString).floatValue
-            return String(format: "%.2f", (billFloat + (billFloat * percent / 100)) / Float(splits))
+            return billFloat * percent
+        }
+    }
+    
+    var total: Float {
+        get {
+            return (billFloat + tip) / Float(splits)
         }
     }
     
     // class constructor
     init() {
-        percent = 20.0
+        percent = 0.2
         bill = "0"
         splits = 1
     }
     
     func reset() {
-        percent = 20.0
+        percent = 0.2
         bill = "0"
         splits = 1
     }
@@ -54,7 +59,7 @@ class Model {
         }
     }
     
-    func appendSepToBill() {
+    func appendDecimalToBill() {
         if bill.rangeOfString(".") == nil {
             bill += "."
         }
