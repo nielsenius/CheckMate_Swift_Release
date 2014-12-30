@@ -26,7 +26,9 @@ extension String {
 
 class ViewController: UIViewController {
     
-    // declare class attributes
+    //
+    // class attribute declarations
+    //
     
     var moneyColor: UIColor!
     var lightGrayColor: UIColor!
@@ -34,6 +36,7 @@ class ViewController: UIViewController {
     var darkGrayColor: UIColor!
     
     var tockSound: AVAudioPlayer!
+    var currencySymbol: String!
     
     var model: Model!
     
@@ -59,7 +62,7 @@ class ViewController: UIViewController {
     var stepper: UIStepper!
     
     
-    
+    // initial setup when the app is launched
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,6 +72,7 @@ class ViewController: UIViewController {
         darkGrayColor = UIColor(red: 38 / 256.0, green: 38 / 256.0, blue: 38 / 256.0, alpha: 1)
         
         tockSound = loadTockSound()
+        currencySymbol = getCurrencySymbol()
         
         model = Model()
         
@@ -85,6 +89,10 @@ class ViewController: UIViewController {
         
         // redrawDisplay()
     }
+    
+    //
+    // event handlers
+    //
     
     func splitChanged(sender: UIStepper) {
         model.splits = Int(sender.value)
@@ -141,6 +149,14 @@ class ViewController: UIViewController {
         return tockSound
     }
     
+    func getCurrencySymbol() -> String {
+        var formatter = NSNumberFormatter()
+        formatter.numberStyle = .CurrencyStyle
+        
+        var currencySymbol = formatter.stringFromNumber(9.99)
+        return currencySymbol![0]
+    }
+    
     func calculateKeypadHeight() -> CGFloat {
         switch screenHeight {
         case 480.0:
@@ -175,33 +191,6 @@ class ViewController: UIViewController {
         tockSound.play()
     }
     
-    func redrawDisplay() {
-        var currencySymbol = getCurrencySymbol()
-        
-        billTextField.text = currencySymbol + model.bill
-        tipTextField.text = currencySymbol + String(format: "%.2f", model.tip)
-        
-        if model.splits > 1 {
-            totalTextField.text = currencySymbol + String(format: "%.2f", model.total) + " x \(model.splits)"
-            splitsLabel.text = "Split \(model.splits) ways"
-        } else {
-            totalTextField.text = currencySymbol + String(format: "%.2f", model.total)
-            splitsLabel.text = "Split 1 way"
-        }
-        
-        sliderLabel.text = "Tip \(Int(model.percent * 100))%"
-        slider.setValue(model.percent, animated: true)
-        stepper.value = Double(model.splits)
-    }
-    
-    func getCurrencySymbol() -> String {
-        var formatter = NSNumberFormatter()
-        formatter.numberStyle = .CurrencyStyle
-        
-        var currencySymbol = formatter.stringFromNumber(9.99)
-        return currencySymbol![0]
-    }
-    
     func animateButtonRelease(sender: UIButton) {
         UIView.animateWithDuration(0.3,
             delay: 0,
@@ -216,6 +205,40 @@ class ViewController: UIViewController {
                 finished in
             }
         )
+    }
+    
+    //
+    // functions for drawing the UI
+    //
+    
+    func redrawDisplay() {
+        billTextField.text = currencySymbol + model.bill
+        
+        if model.bill == "0" {
+            tipTextField.text = ""
+        } else {
+            tipTextField.text = currencySymbol + String(format: "%.2f", model.tip)
+        }
+        
+        if model.splits > 1 {
+            if model.bill == "0" {
+                totalTextField.text = ""
+            } else {
+                totalTextField.text = currencySymbol + String(format: "%.2f", model.total) + " x \(model.splits)"
+            }
+            splitsLabel.text = "Split \(model.splits) ways"
+        } else {
+            if model.bill == "0" {
+                totalTextField.text = ""
+            } else {
+                totalTextField.text = currencySymbol + String(format: "%.2f", model.total)
+            }
+            splitsLabel.text = "Split 1 way"
+        }
+        
+        sliderLabel.text = "Tip \(Int(model.percent * 100))%"
+        slider.setValue(model.percent, animated: true)
+        stepper.value = Double(model.splits)
     }
     
     func drawDisplay() {
@@ -259,7 +282,7 @@ class ViewController: UIViewController {
         display.addSubview(tipLabel)
         
         tipTextField = UITextField(frame: CGRectMake(margin + labelWidth, secondSpace, screenWidth - labelWidth - margin * 2, numHeight))
-        tipTextField.text = "$0"
+        tipTextField.text = ""
         tipTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         tipTextField.textColor = UIColor.whiteColor()
         tipTextField.textAlignment = .Right
@@ -274,7 +297,7 @@ class ViewController: UIViewController {
         display.addSubview(totalLabel)
         
         totalTextField = UITextField(frame: CGRectMake(margin + labelWidth, thirdSpace, screenWidth - labelWidth - margin * 2, numHeight))
-        totalTextField.text = "$0"
+        totalTextField.text = ""
         totalTextField.font = UIFont(name: "HelveticaNeue-UltraLight", size: numFontSize)
         totalTextField.textColor = UIColor.whiteColor()
         totalTextField.textAlignment = .Right
@@ -304,13 +327,13 @@ class ViewController: UIViewController {
         stepper.addTarget(self, action: "splitChanged:", forControlEvents: .ValueChanged)
         controls.addSubview(stepper)
         
-        sliderLabel = UILabel(frame: CGRectMake(6, 55, 100, 20))
+        sliderLabel = UILabel(frame: CGRectMake(6, 55, 66, 20))
         sliderLabel.text = "Tip 20%"
         controls.addSubview(sliderLabel)
         
-        slider = UISlider(frame: CGRectMake(100, 50, screenWidth - 106, 29))
+        slider = UISlider(frame: CGRectMake(82, 50, screenWidth - 88, 29))
         slider.minimumValue = 0.0
-        slider.maximumValue = 1.0
+        slider.maximumValue = 0.3
         slider.continuous = true
         slider.tintColor = moneyColor
         slider.value = 0.2
@@ -350,6 +373,7 @@ class ViewController: UIViewController {
         var zero = UIButton(frame: CGRectMake(0, keypadHeight - keyHeight, keyWidth * 2, keyHeight))
         zero.setTitle("0", forState: UIControlState.Normal)
         zero.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: numFontSize)
+        zero.titleEdgeInsets = UIEdgeInsetsMake(0.0, -keyWidth, 0.0, 0.0)
         zero.backgroundColor = UIColor.whiteColor()
         zero.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         zero.tag = 0
@@ -361,7 +385,7 @@ class ViewController: UIViewController {
         
         var decimal = UIButton(frame: CGRectMake(keyWidth * 2, keypadHeight - keyHeight, keyWidth, keyHeight))
         decimal.setTitle(".", forState: UIControlState.Normal)
-        decimal.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: numFontSize)
+        decimal.titleLabel!.font = UIFont(name: "HelveticaNeue-Bold", size: charFontSize)
         decimal.backgroundColor = UIColor.whiteColor()
         decimal.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         decimal.tag = 11
