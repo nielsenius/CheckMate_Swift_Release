@@ -363,6 +363,7 @@ class ViewController: UIViewController {
             
             button.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
             button.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchDragOutside)
             button.addTarget(self, action: "numButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
             
             keypad.addSubview(button)
@@ -380,6 +381,8 @@ class ViewController: UIViewController {
         
         zero.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         zero.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        zero.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchDragOutside)
+        zero.addTarget(self, action: "numButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(zero)
         
@@ -392,6 +395,7 @@ class ViewController: UIViewController {
         
         decimal.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         decimal.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        decimal.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchDragOutside)
         decimal.addTarget(self, action: "decimalButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(decimal)
@@ -405,6 +409,7 @@ class ViewController: UIViewController {
         
         clear.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         clear.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        clear.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchDragOutside)
         clear.addTarget(self, action: "clearButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(clear)
@@ -418,6 +423,7 @@ class ViewController: UIViewController {
         
         delete.addTarget(self, action: "anyButtonPress:", forControlEvents: UIControlEvents.TouchDown)
         delete.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
+        delete.addTarget(self, action: "animateButtonRelease:", forControlEvents: UIControlEvents.TouchDragOutside)
         delete.addTarget(self, action: "deleteButtonRelease:", forControlEvents: UIControlEvents.TouchUpInside)
         
         keypad.addSubview(delete)
