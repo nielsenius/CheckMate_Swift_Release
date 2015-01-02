@@ -10,7 +10,9 @@ import Foundation
 
 class Model {
     
+    //
     // declare class attributes
+    //
     
     var percent: Float
     var bill: String
@@ -34,6 +36,10 @@ class Model {
         }
     }
     
+    //
+    // object instantiated
+    //
+    
     // class constructor
     init() {
         percent = 0.2
@@ -41,16 +47,19 @@ class Model {
         splits = 1
     }
     
+    // reset all values
     func reset() {
         percent = 0.2
         bill = "0"
         splits = 1
     }
     
+    // setter for percent
     func setPercent(percent: Float) {
         self.percent = percent
     }
     
+    // takes a string and appends it to the end of bill
     func appendNumToBill(num: String) {
         if bill == "0" {
             bill = num
@@ -59,22 +68,20 @@ class Model {
         }
     }
     
+    // takes "." and appends it to bill
     func appendDecimalToBill() {
         if bill.rangeOfString(".") == nil {
             bill += "."
         }
     }
     
+    // deletes the last character from bill
     func deleteBill() {
         if countElements(bill) == 1 {
             bill = "0"
         } else {
             bill = bill.substringToIndex(bill.endIndex.predecessor())
         }
-    }
-    
-    func clearBill() {
-        reset()
     }
     
 }

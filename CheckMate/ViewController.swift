@@ -70,6 +70,9 @@ class ViewController: UIViewController {
     var slider: UISlider!
     var stepper: UIStepper!
     
+    //
+    // app is loaded
+    //
     
     // initial setup when the app is launched
     override func viewDidLoad() {
@@ -146,7 +149,7 @@ class ViewController: UIViewController {
     
     // C key is released from press
     func clearButtonRelease(sender: UIButton) {
-        model.clearBill()
+        model.reset()
         animateButtonRelease(sender)
         redrawDisplay()
     }
