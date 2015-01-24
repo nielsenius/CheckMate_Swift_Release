@@ -111,7 +111,7 @@ class ViewController: UIViewController {
     
     // when the bill splitter is pressed
     func splitChanged(sender: UIStepper) {
-        model.splits = Int(sender.value)
+        model.setSplits(Int(sender.value))
         redrawDisplay()
     }
     

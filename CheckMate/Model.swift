@@ -59,6 +59,11 @@ class Model {
         self.percent = percent
     }
     
+    // setter for splits
+    func setSplits(splits: Int) {
+        self.splits = splits
+    }
+    
     // takes a string and appends it to the end of bill
     func appendNumToBill(num: String) {
         if bill == "0" {
